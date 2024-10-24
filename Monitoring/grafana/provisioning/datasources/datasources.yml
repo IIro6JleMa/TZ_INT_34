@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090 #ykazal kakoi datesources ispolzovat v dashboard
+    isDefault: true
+    editable: false #nelza udalat tables

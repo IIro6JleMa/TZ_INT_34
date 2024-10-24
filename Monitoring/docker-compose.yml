@@ -26,6 +26,9 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=maks #pervonachalniy parol dla admin
     volumes:
       - grafana-storage:/var/lib/grafana  # Save data for GRAFANA
+      - ./grafana/provisioning:/etc/grafana/provisioning #files of provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards  #files of dashboards
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini  #files of grafana.ini
 
 volumes:
   grafana-storage:
