@@ -1,0 +1,31 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus #ispolzuy image prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml #ykazivay gde hranitsa conf file
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9091:9090" # probros portov ( mozhno 9090 )
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter #ispolzuy image blackbox-exporter dla proverki dostypa k saity
+    volumes:
+      - ./blackbox.yml:/config/blackbox.yml #conf file
+    command:
+      - '--config.file=/config/blackbox.yml'
+    ports:
+      - "9115:9115" #ispolzuy port 9115
+
+  grafana:
+    image: grafana/grafana #obraz grafana
+    ports:
+      - "3000:3000" #probros ne nyzhed, delau default port
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=maks #pervonachalniy parol dla admin
+    volumes:
+      - grafana-storage:/var/lib/grafana  # Save data for GRAFANA
+
+volumes:
+  grafana-storage:

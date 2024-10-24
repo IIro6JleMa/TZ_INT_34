@@ -1,0 +1,17 @@
+# Nastroyka postgresql.conf
+listen_addresses = '*'
+# slyshaem vsex
+port = 5432
+# nastroyka logov
+log_destination = 'stderr'
+logging_collector = on
+log_directory = 'pg_log'
+log_filename = 'postgresql-%Y-%m-%d.log'
+log_rotation_age = 1d
+log_rotation_size = 10MB
+log_statement = 'all'
+log_duration = on
+log_min_duration_statement = 2000
+# paramter connectov
+max_connections = 100
+

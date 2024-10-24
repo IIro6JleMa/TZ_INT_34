@@ -1,0 +1,12 @@
+---
+- name: Nastroyka servera DB 10
+  hosts: my_servers
+  become: true
+
+  roles:
+    - common
+    - MD_firewall
+    - MD_ssh
+    - MD_fail2ban
+    - fix_error
+    - MD_postgresql

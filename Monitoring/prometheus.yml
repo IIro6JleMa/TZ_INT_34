@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s #interval sbora metrik
+
+scrape_configs:
+  - job_name: 'blackbox' #nazvanie zadachi blackbox
+    metrics_path: /probe #default put dla sbora metrik for blackbox
+    params: #opredelenit parametrov
+      module: [http_2xx]  # proverka vozvrata otveta ot saita kod 2xx (sucessful)
+
+    static_configs: #configurasia targets
+      - targets:
+        - https://ptsecurity.com  # sait iz TZ
+
+    relabel_configs: #isoplzovanie raznih metok
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115  # address blackbox

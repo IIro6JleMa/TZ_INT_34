@@ -1,0 +1,22 @@
+---
+- name: Install MD_firewall
+  apt:
+    name: ufw
+    state: present
+
+- name: State allow ssh
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: State connect to Postgresql of port 5432
+  ufw:
+    rule: allow
+    port: '5432'
+    proto: tcp
+
+- name: On firewall
+  ufw:
+    state: enabled
+    policy: deny
+    logging: 'on'

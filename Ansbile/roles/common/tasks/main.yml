@@ -1,0 +1,18 @@
+---
+- name: Update cache
+  apt:
+    update_cache: yes
+
+- name: Update system
+  apt:
+    upgrade: dist
+    autoremove: yes
+
+- name: Install base packages
+  apt:
+    name:
+      - vim
+      - curl
+      - gnupg
+      - ca-certificates
+    state: present

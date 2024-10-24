@@ -1,0 +1,8 @@
+#versia docker-compose
+version: '3'
+#infa po servisy
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"

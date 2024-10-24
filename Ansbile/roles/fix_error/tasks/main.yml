@@ -1,0 +1,45 @@
+- name: add repo Deb11
+  copy:
+    src: bullseye.list
+    dest: /etc/apt/sources.list.d/bullseye.list
+
+- name: nastroyka prioritetov
+  copy:
+    dest: /etc/apt/preferences.d/bullseye.pref
+    content: |
+      Package: *
+      Pin: release n=bullseye
+      Pin-Priority: 100
+
+- name: update cachke
+  apt:
+    update_cache: yes
+
+- name: install packages
+  apt:
+    name:
+      - libc6
+      - libgcc-s1
+      - libicu67
+      - libpq5
+      - libselinux1
+      - libzstd1
+      - libreadline8
+      - libssl1.1
+      - libgssapi-krb5-2
+    state: latest
+    default_release: bullseye
+
+- name: del repo Deb11
+  file:
+    path: /etc/apt/sources.list.d/bullseye.list
+    state: absent
+
+- name: del prioriteti
+  file:
+    path: /etc/apt/preferences.d/bullseye.pref
+    state: absent
+
+- name: update cache after install packages
+  apt:
+    update_cache: yes

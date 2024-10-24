@@ -1,0 +1,17 @@
+---
+- name: Install f2b
+  apt:
+    name: fail2ban
+    state: present
+
+- name: Nastroyka f2b
+  template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+  notify: Restart f2b
+
+- name: Zapysk f2b
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
